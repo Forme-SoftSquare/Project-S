@@ -3,19 +3,25 @@ using UnityEngine;
 public class Hexagon : PlayerShape
 {
 
-    private Sprite sprite;
+    private Sprite hexagonSprite;
 
-    public override void Start()
+    protected override void LoadSprite()
     {
-        sprite = Resources.Load<Sprite>("Sprites/PlayerShape/Hexagon");
+        hexagonSprite = Resources.Load<Sprite>("Sprites/PlayerShape/Hexagon");
+        if (hexagonSprite == null)
+        {
+            Debug.LogError("Failed to load Hexagon Sprite!");
+        }
+        else
+        {
+            // Set new sprite to the sprite renderer
+            GetComponent<SpriteRenderer>().sprite = hexagonSprite;
+        }
     }
 
-    public override Sprite Sprite
+    protected override void DestroyShape()
     {
-        get 
-        {
-            return sprite;
-        }
+        Destroy(GetComponent<Hexagon>());
     }
 
     public override void MovementSkill()

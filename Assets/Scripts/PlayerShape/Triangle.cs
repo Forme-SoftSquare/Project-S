@@ -3,19 +3,25 @@ using UnityEngine;
 public class Triangle : PlayerShape
 {
 
-    private Sprite sprite;
+    private Sprite triangleSprite;
 
-    public override void Start()
+    protected override void LoadSprite()
     {
-        sprite = Resources.Load<Sprite>("Sprites/PlayerShape/Triangle");
+        triangleSprite = Resources.Load<Sprite>("Sprites/PlayerShape/Triangle");
+        if (triangleSprite == null)
+        {
+            Debug.LogError("Failed to load Triangle Sprite!");
+        }
+        else
+        {
+            // Set new sprite to the sprite renderer
+            GetComponent<SpriteRenderer>().sprite = triangleSprite;
+        }
     }
 
-    public override Sprite Sprite
+    protected override void DestroyShape()
     {
-        get 
-        {
-            return sprite;
-        }
+        Destroy(GetComponent<Triangle>());
     }
 
     public override void MovementSkill()

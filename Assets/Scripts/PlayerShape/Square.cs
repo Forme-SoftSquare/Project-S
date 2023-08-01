@@ -3,19 +3,25 @@ using UnityEngine;
 public class Square : PlayerShape
 {
 
-    private Sprite sprite;
+    private Sprite squareSprite;
 
-    public override void Start()
+    protected override void LoadSprite()
     {
-        sprite = Resources.Load<Sprite>("Sprites/PlayerShape/Square");
+        squareSprite = Resources.Load<Sprite>("Sprites/PlayerShape/Square");
+        if (squareSprite == null)
+        {
+            Debug.LogError("Failed to load Square Sprite!");
+        }
+        else
+        {
+            // Set new sprite to the sprite renderer
+            GetComponent<SpriteRenderer>().sprite = squareSprite;
+        }
     }
 
-    public override Sprite Sprite
+    protected override void DestroyShape()
     {
-        get 
-        {
-            return sprite;
-        }
+        Destroy(GetComponent<Square>());
     }
 
     public override void MovementSkill()

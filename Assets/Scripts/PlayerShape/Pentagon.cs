@@ -3,19 +3,25 @@ using UnityEngine;
 public class Pentagon : PlayerShape
 {
 
-    private Sprite sprite;
+    private Sprite pentagonSprite;
 
-    public override void Start()
+    protected override void LoadSprite()
     {
-        sprite = Resources.Load<Sprite>("Sprites/PlayerShape/Pentagon");
+        pentagonSprite = Resources.Load<Sprite>("Sprites/PlayerShape/Pentagon");
+        if (pentagonSprite == null)
+        {
+            Debug.LogError("Failed to load Pentagon Sprite!");
+        }
+        else
+        {
+            // Set new sprite to the sprite renderer
+            GetComponent<SpriteRenderer>().sprite = pentagonSprite;
+        }
     }
 
-    public override Sprite Sprite
+    protected override void DestroyShape()
     {
-        get 
-        {
-            return sprite;
-        }
+        Destroy(GetComponent<Pentagon>());
     }
 
     public override void MovementSkill()

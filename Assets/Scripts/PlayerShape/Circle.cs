@@ -3,19 +3,25 @@ using UnityEngine;
 public class Circle : PlayerShape
 {
 
-    private Sprite sprite;
+    private Sprite circleSprite;
 
-    public override void Start()
+    protected override void LoadSprite()
     {
-        sprite = Resources.Load<Sprite>("Sprites/PlayerShape/Circle");
+        circleSprite = Resources.Load<Sprite>("Sprites/PlayerShape/Circle");
+        if (circleSprite == null)
+        {
+            Debug.LogError("Failed to load Circle Sprite!");
+        }
+        else
+        {
+            // Set new sprite to the sprite renderer
+            GetComponent<SpriteRenderer>().sprite = circleSprite;
+        }
     }
 
-    public override Sprite Sprite
+    protected override void DestroyShape()
     {
-        get 
-        {
-            return sprite;
-        }
+        Destroy(GetComponent<Circle>());
     }
 
     public override void MovementSkill()
