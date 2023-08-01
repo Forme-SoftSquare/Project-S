@@ -15,13 +15,8 @@ public class Pentagon : PlayerShape
         else
         {
             // Set new sprite to the sprite renderer
-            GetComponent<SpriteRenderer>().sprite = pentagonSprite;
+            base.spriteRenderer.sprite = pentagonSprite;
         }
-    }
-
-    protected override void DestroyShape()
-    {
-        Destroy(GetComponent<Pentagon>());
     }
 
     public override void MovementSkill()
