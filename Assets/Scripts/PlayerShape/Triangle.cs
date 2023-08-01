@@ -15,13 +15,8 @@ public class Triangle : PlayerShape
         else
         {
             // Set new sprite to the sprite renderer
-            GetComponent<SpriteRenderer>().sprite = triangleSprite;
+            base.spriteRenderer.sprite = triangleSprite;
         }
-    }
-
-    protected override void DestroyShape()
-    {
-        Destroy(GetComponent<Triangle>());
     }
 
     public override void MovementSkill()

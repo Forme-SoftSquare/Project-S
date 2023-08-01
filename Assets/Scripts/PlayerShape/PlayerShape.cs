@@ -12,12 +12,16 @@ public enum PlayerShapeType
 public abstract class PlayerShape : MonoBehaviour
 {
 
+    protected SpriteRenderer spriteRenderer;
     public PlayerShapeType shapeType;
+
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
 
     protected abstract void LoadSprite();
-
-    protected abstract void DestroyShape();
 
     public abstract void MovementSkill();
 
@@ -61,5 +65,10 @@ public abstract class PlayerShape : MonoBehaviour
 
         // Load the sprite for the new shape
         LoadSprite();
+    }
+
+    private void DestroyShape()
+    {
+        Destroy(gameObject);
     }
 }

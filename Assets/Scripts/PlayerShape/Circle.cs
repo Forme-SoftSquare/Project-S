@@ -15,13 +15,8 @@ public class Circle : PlayerShape
         else
         {
             // Set new sprite to the sprite renderer
-            GetComponent<SpriteRenderer>().sprite = circleSprite;
+            base.spriteRenderer.sprite = circleSprite;
         }
-    }
-
-    protected override void DestroyShape()
-    {
-        Destroy(GetComponent<Circle>());
     }
 
     public override void MovementSkill()

@@ -15,13 +15,8 @@ public class Hexagon : PlayerShape
         else
         {
             // Set new sprite to the sprite renderer
-            GetComponent<SpriteRenderer>().sprite = hexagonSprite;
+            base.spriteRenderer.sprite = hexagonSprite;
         }
-    }
-
-    protected override void DestroyShape()
-    {
-        Destroy(GetComponent<Hexagon>());
     }
 
     public override void MovementSkill()

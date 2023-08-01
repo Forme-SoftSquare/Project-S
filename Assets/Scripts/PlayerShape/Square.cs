@@ -15,13 +15,8 @@ public class Square : PlayerShape
         else
         {
             // Set new sprite to the sprite renderer
-            GetComponent<SpriteRenderer>().sprite = squareSprite;
+            base.spriteRenderer.sprite = squareSprite;
         }
-    }
-
-    protected override void DestroyShape()
-    {
-        Destroy(GetComponent<Square>());
     }
 
     public override void MovementSkill()
