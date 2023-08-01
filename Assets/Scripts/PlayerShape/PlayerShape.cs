@@ -11,6 +11,11 @@ public enum PlayerShapeType
 
 public abstract class PlayerShape : MonoBehaviour
 {
+
+    public abstract Sprite Sprite { get; }
+
+    public abstract void Start();
+
     public abstract void MovementSkill();
 
     public abstract void ActionSkill();
