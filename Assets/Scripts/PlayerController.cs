@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private Rigidbody2D rb2D;
+    private Rigidbody2D rb;
 
     private float moveSpeed;
     private float jumpForce;
@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb2D = gameObject.GetComponent<Rigidbody2D>();
+        rb = gameObject.GetComponent<Rigidbody2D>();
 
         moveSpeed = 3f;
         jumpForce = 60f;
@@ -34,13 +34,13 @@ public class PlayerController : MonoBehaviour
         // Move the player if horizontal input is clicked
         if (moveHorizontal != 0)
         {
-            rb2D.AddForce(new Vector2(moveHorizontal * moveSpeed, 0), ForceMode2D.Impulse);
+            rb.AddForce(new Vector2(moveHorizontal * moveSpeed, 0), ForceMode2D.Impulse);
         }
 
         // Jump the player if vertical input is clicked and player is not already jumping
         if (moveVertical > 0 && !isJumping)
         {
-            rb2D.AddForce(new Vector2(0f, moveVertical * jumpForce), ForceMode2D.Impulse);
+            rb.AddForce(new Vector2(0f, moveVertical * jumpForce), ForceMode2D.Impulse);
         }
     }
 
