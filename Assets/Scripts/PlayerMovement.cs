@@ -1,5 +1,7 @@
 using UnityEngine;
 
+public enum Direction { None, Left, Right }
+
 public class PlayerMovement : MonoBehaviour
 {
 
@@ -8,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     internal float moveSpeed;
     internal float jumpForce;
     internal bool isJumping;
+    internal Direction direction;
 
     // Start is called before the first frame update
     void Start()
@@ -15,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
         moveSpeed = 3f;
         jumpForce = 40f;
         isJumping = false;
+        direction = Direction.None;
     }
 
     // FixedUpdate is called once per physics frame
@@ -44,11 +48,13 @@ public class PlayerMovement : MonoBehaviour
     private void MovePlayerRight()
     {
         playerController.rb.AddForce(new Vector2(-1f * moveSpeed, 0f), ForceMode2D.Impulse);
+        direction = Direction.Right;
     }
 
     private void MovePlayerLeft()
     {
         playerController.rb.AddForce(new Vector2(moveSpeed, 0f), ForceMode2D.Impulse);
+        direction = Direction.Left;
     }
 
     private void Jump()
