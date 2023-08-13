@@ -7,10 +7,6 @@ public class Triangle : Shape
     public override void LoadSprite()
     {
         sprite = Addressables.LoadAssetAsync<Sprite>("Assets/Sprites/Shapes/Triangle.png").WaitForCompletion();
-        if (sprite == null)
-        {
-            Debug.LogError("Failed to load Triangle Sprite!");
-        }
     }
 
     public override void MovementSkill()

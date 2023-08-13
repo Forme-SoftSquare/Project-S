@@ -7,10 +7,6 @@ public class Square : Shape
     public override void LoadSprite()
     {
         sprite = Addressables.LoadAssetAsync<Sprite>("Assets/Sprites/Shapes/Square.png").WaitForCompletion();
-        if (sprite == null)
-        {
-            Debug.LogError("Failed to load Square Sprite!");
-        }
     }
 
     public override void MovementSkill()
