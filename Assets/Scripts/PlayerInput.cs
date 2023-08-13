@@ -19,10 +19,10 @@ public class PlayerInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isLeftPressed = Input.GetKey(KeyCode.LeftArrow);
-        isRightPressed = Input.GetKey(KeyCode.RightArrow);
-        isUpPressed = Input.GetKey(KeyCode.UpArrow);
-        isDownPressed = Input.GetKey(KeyCode.DownArrow);
+        isLeftPressed = Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A);
+        isRightPressed = Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D);
+        isUpPressed = Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Space);
+        isDownPressed = Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S);
 
         isAlpha1Pressed = Input.GetKeyDown(KeyCode.Alpha1);
         isAlpha2Pressed = Input.GetKeyDown(KeyCode.Alpha2);
