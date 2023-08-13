@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] internal PlayerInput playerInput;
     [SerializeField] internal PlayerMovement playerMovement;
+    [SerializeField] internal PlayerCollision playerCollision;
 
     internal Rigidbody2D rb;
 
