@@ -8,11 +8,35 @@ public class PlayerShape : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     internal Shape shape;
 
-    private void Start()
+    void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         ChangeShape(ShapeType.Circle);
+    }
+
+    void Update()
+    {
+        if (playerController.playerInput.isAlpha1Pressed)
+        {
+            ChangeShape(ShapeType.Circle);
+        }
+        else if (playerController.playerInput.isAlpha2Pressed)
+        {
+            ChangeShape(ShapeType.Square);
+        }
+        else if (playerController.playerInput.isAlpha3Pressed)
+        {
+            ChangeShape(ShapeType.Triangle);
+        }
+        else if (playerController.playerInput.isAlpha4Pressed)
+        {
+            ChangeShape(ShapeType.Pentagon);
+        }
+        else if (playerController.playerInput.isAlpha5Pressed)
+        {
+            ChangeShape(ShapeType.Hexagon);
+        }
     }
 
     private void ChangeShape(ShapeType newShapeType)
@@ -21,7 +45,7 @@ public class PlayerShape : MonoBehaviour
         if (newShapeType == shape?.type) return;
 
         // Destroy the current player shape (if it already exists)
-        if (shape != null) shape.DestroyShape();
+        shape?.DestroyShape();
 
         // Add the new shape based on the given ShapeType
         switch (newShapeType)
