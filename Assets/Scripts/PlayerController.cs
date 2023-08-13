@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
+    [SerializeField] internal PlayerShape playerShape;
     [SerializeField] internal PlayerInput playerInput;
     [SerializeField] internal PlayerMovement playerMovement;
     [SerializeField] internal PlayerCollision playerCollision;

@@ -264,6 +264,7 @@ GameObject:
   - component: {fileID: 909589006}
   - component: {fileID: 909589010}
   - component: {fileID: 909589005}
+  - component: {fileID: 909589014}
   - component: {fileID: 909589013}
   - component: {fileID: 909589012}
   - component: {fileID: 909589011}
@@ -286,9 +287,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4094e55f9664b545b7cde51874616c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerShape: {fileID: 909589014}
   playerInput: {fileID: 909589013}
   playerMovement: {fileID: 909589012}
-  playerCollision: {fileID: 0}
+  playerCollision: {fileID: 909589011}
 --- !u!58 &909589006
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -499,6 +501,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3806bb1bd92b95c46a1a76baed1a2f38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 909589005}
+--- !u!114 &909589014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 909589004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9c6dea0e4f07b1488c31626914cc447, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 909589005}
