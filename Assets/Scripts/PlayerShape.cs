@@ -21,7 +21,7 @@ public class PlayerShape : MonoBehaviour
         if (newShapeType == shape?.type) return;
 
         // Destroy the current player shape (if it already exists)
-        DestroyShape();
+        if (shape != null) shape.DestroyShape();
 
         // Add the new shape based on the given ShapeType
         switch (newShapeType)
@@ -56,10 +56,5 @@ public class PlayerShape : MonoBehaviour
 
         // Set the sprite renderer's sprite to the new shape's sprite
         spriteRenderer.sprite = shape.sprite;
-    }
-
-    private void DestroyShape()
-    {
-        Destroy(gameObject);
     }
 }

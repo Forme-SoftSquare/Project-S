@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public class Square : Shape
 {
+
     public override void LoadSprite()
     {
-        sprite = Resources.Load<Sprite>("Sprites/PlayerShape/Square");
+        sprite = Addressables.LoadAssetAsync<Sprite>("Assets/Sprites/Shapes/Square.png").WaitForCompletion();
         if (sprite == null)
         {
             Debug.LogError("Failed to load Square Sprite!");
@@ -19,5 +21,10 @@ public class Square : Shape
     public override void ActionSkill()
     {
 
+    }
+
+    public override void DestroyShape()
+    {
+        Destroy(gameObject.GetComponent<Square>());
     }
 }

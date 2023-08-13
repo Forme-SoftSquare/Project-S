@@ -20,4 +20,6 @@ public abstract class Shape : MonoBehaviour
     public abstract void MovementSkill();
 
     public abstract void ActionSkill();
+
+    public abstract void DestroyShape();
 }

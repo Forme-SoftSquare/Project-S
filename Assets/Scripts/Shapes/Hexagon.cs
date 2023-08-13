@@ -1,11 +1,12 @@
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public class Hexagon : Shape
 {
 
     public override void LoadSprite()
     {
-        sprite = Resources.Load<Sprite>("Sprites/PlayerShape/Hexagon");
+        sprite = Addressables.LoadAssetAsync<Sprite>("Assets/Sprites/Shapes/Hexagon.png").WaitForCompletion();
         if (sprite == null)
         {
             Debug.LogError("Failed to load Hexagon Sprite!");
@@ -20,5 +21,10 @@ public class Hexagon : Shape
     public override void ActionSkill()
     {
 
+    }
+
+    public override void DestroyShape()
+    {
+        Destroy(gameObject.GetComponent<Hexagon>());
     }
 }
