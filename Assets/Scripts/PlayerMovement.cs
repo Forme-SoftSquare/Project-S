@@ -45,9 +45,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (playerController.playerInput.isUpReleased && playerController.rb.velocity.y > 0f)
         {
-            // Jump less high if player releases jump button
-            float jumpDeceleration = 0.5f;
-            playerController.rb.velocity = new Vector2(playerController.rb.velocity.x, playerController.rb.velocity.y * jumpDeceleration);
+            ApplyJumpReleaseVelocity();
         }
         if (playerController.playerInput.isDownHeld && isJumping)
         {
@@ -87,6 +85,12 @@ public class PlayerMovement : MonoBehaviour
     private void Jump()
     {
         playerController.rb.velocity = new Vector2(playerController.rb.velocity.x, jumpForce);
+    }
+
+    private void ApplyJumpReleaseVelocity()
+    {
+        float jumpDeceleration = 0.5f;
+        playerController.rb.velocity = new Vector2(playerController.rb.velocity.x, playerController.rb.velocity.y * jumpDeceleration);
     }
 
     private void Descend()
