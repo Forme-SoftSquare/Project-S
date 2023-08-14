@@ -20,12 +20,12 @@ public class PlayerMovement : MonoBehaviour
         direction = Direction.Right;
 
         moveSpeed = 10f;
-        jumpForce = 40f;
+        jumpForce = 60f;
         isJumping = false;
         hasDoubleJumped = false;
     }
 
-    // FixedUpdate is called once per physics frame
+    // Update is called once per frame
     void Update()
     {
         // Horizontal movements
@@ -39,9 +39,15 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Vertical movements
-        if (playerController.playerInput.isUpHeld && !isJumping)
+        if (playerController.playerInput.isUpPressed && !isJumping)
         {
             Jump();
+        }
+        if (playerController.playerInput.isUpReleased && playerController.rb.velocity.y > 0f)
+        {
+            // Jump less high if player releases jump button
+            float jumpDeceleration = 0.5f;
+            playerController.rb.velocity = new Vector2(playerController.rb.velocity.x, playerController.rb.velocity.y * jumpDeceleration);
         }
         if (playerController.playerInput.isDownHeld && isJumping)
         {
