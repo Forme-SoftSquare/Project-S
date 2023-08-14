@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
         direction = Direction.Right;
 
         moveSpeed = 10f;
-        jumpForce = 60f;
+        jumpForce = 50f;
         isJumping = false;
         hasDoubleJumped = false;
     }
@@ -66,23 +66,20 @@ public class PlayerMovement : MonoBehaviour
         // Player skills
         if (playerController.playerInput.isMovementSkillPressed && !isMovementSkillActive)
         {
-            if (isJumping)
-            {
-                isMovementSkillActive = true;
-            }
-
             ActivateMovementSkill();
         }
     }
 
     private void MovePlayerRight()
     {
+        if (isMovementSkillActive) return;
         playerController.rb.velocity = new Vector2(moveSpeed, playerController.rb.velocity.y);
         direction = Direction.Right;
     }
 
     private void MovePlayerLeft()
     {
+        if (isMovementSkillActive) return;
         playerController.rb.velocity = new Vector2(-1f * moveSpeed, playerController.rb.velocity.y);
         direction = Direction.Left;
     }
@@ -99,6 +96,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void ActivateMovementSkill()
     {
+        isMovementSkillActive = true;
         playerController.playerShape.shape.ActivateMovementSkill(playerController);
     }
 }
