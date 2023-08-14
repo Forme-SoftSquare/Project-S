@@ -6,42 +6,55 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private PlayerController playerController;
 
+    internal Direction direction;
+
     internal float moveSpeed;
     internal float jumpForce;
     internal bool isJumping;
     internal bool isMovementSkillActive;
-    internal Direction direction;
+    internal bool hasDoubleJumped;
 
     // Start is called before the first frame update
     void Start()
     {
+        direction = Direction.None;
+
         moveSpeed = 10f;
         jumpForce = 40f;
         isJumping = false;
-        direction = Direction.None;
+        hasDoubleJumped = false;
     }
 
     // FixedUpdate is called once per physics frame
     void Update()
     {
         // Horizontal movements
-        if (playerController.playerInput.isLeftPressed)
+        if (playerController.playerInput.isLeftHeld)
         {
             MovePlayerLeft();
         }
-        else if (playerController.playerInput.isRightPressed)
+        else if (playerController.playerInput.isRightHeld)
         {
             MovePlayerRight();
         }
 
         // Vertical movements
-        if (playerController.playerInput.isUpPressed && !isJumping)
+        if (playerController.playerInput.isUpHeld && !isJumping)
         {
             Jump();
         }
-        if (playerController.playerInput.isDownPressed && isJumping)
+        if (playerController.playerInput.isDownHeld && isJumping)
         {
             Descend();
+        }
+
+        // Double jump
+        bool isCircle = playerController.playerShape.shape.type == ShapeType.Circle;
+        bool canDoubleJump = isCircle && isJumping && !hasDoubleJumped;
+        if (playerController.playerInput.isUpPressed && canDoubleJump)
+        {
+            hasDoubleJumped = true;
+            Jump();
         }
 
         // Player skills

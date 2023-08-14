@@ -5,10 +5,11 @@ public class PlayerInput : MonoBehaviour
 
     [SerializeField] private PlayerController playerController;
 
-    internal bool isLeftPressed;
-    internal bool isRightPressed;
+    internal bool isLeftHeld;
+    internal bool isRightHeld;
+    internal bool isUpHeld;
     internal bool isUpPressed;
-    internal bool isDownPressed;
+    internal bool isDownHeld;
 
     internal bool isAlpha1Pressed;
     internal bool isAlpha2Pressed;
@@ -21,10 +22,11 @@ public class PlayerInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isLeftPressed = Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A);
-        isRightPressed = Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D);
-        isUpPressed = Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Space);
-        isDownPressed = Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S);
+        isLeftHeld = Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A);
+        isRightHeld = Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D);
+        isUpHeld = Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Space);
+        isUpPressed = Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space);
+        isDownHeld = Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S);
 
         isAlpha1Pressed = Input.GetKeyDown(KeyCode.Alpha1);
         isAlpha2Pressed = Input.GetKeyDown(KeyCode.Alpha2);

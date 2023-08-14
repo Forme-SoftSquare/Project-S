@@ -26,6 +26,7 @@ public class PlayerCollision : MonoBehaviour
 
     private void ResetAerialSkills()
     {
+        playerController.playerMovement.hasDoubleJumped = false;
         playerController.playerMovement.isMovementSkillActive = false;
     }
 }
