@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum Direction { None, Left, Right }
+public enum Direction { Left, Right }
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        direction = Direction.None;
+        direction = Direction.Right;
 
         moveSpeed = 10f;
         jumpForce = 40f;
