@@ -1,12 +1,11 @@
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 
 public class Square : Shape
 {
 
     public override void LoadSprite()
     {
-        sprite = Addressables.LoadAssetAsync<Sprite>("Assets/Sprites/Shapes/Square.png").WaitForCompletion();
+        sprite = Resources.Load<Sprite>("Sprites/Shapes/Square");
     }
 
     public override void ActivateMovementSkill(PlayerController playerController)

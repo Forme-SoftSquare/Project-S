@@ -1,12 +1,11 @@
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 
 public class Hexagon : Shape
 {
 
     public override void LoadSprite()
     {
-        sprite = Addressables.LoadAssetAsync<Sprite>("Assets/Sprites/Shapes/Hexagon.png").WaitForCompletion();
+        sprite = Resources.Load<Sprite>("Sprites/Shapes/Hexagon");
     }
 
     public override void ActivateMovementSkill(PlayerController playerController)

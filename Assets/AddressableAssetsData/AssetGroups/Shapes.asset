@@ -16,37 +16,7 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 21ba0aaca4916b74ea631fd2a36e1212
-  m_SerializeEntries:
-  - m_GUID: b5946a806c6de8f4aa4f9bf7c7550e3c
-    m_Address: Assets/Sprites/Shapes
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 9a0af5c926cc6ba4f923fed323fbff92
-    m_Address: Assets/Sprites/Shapes/Circle.png
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 1cd1b489a5dadcf488954eb717dfb0a4
-    m_Address: Assets/Sprites/Shapes/Hexagon.png
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a6c39e4cde4e52646a413e79ea9e6050
-    m_Address: Assets/Sprites/Shapes/Pentagon.png
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8db831ffc0bef374e88f675ab01fd5bf
-    m_Address: Assets/Sprites/Shapes/Square.png
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4aad2e947c6fb2548b20d4145f803738
-    m_Address: Assets/Sprites/Shapes/Triangle.png
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 708ce3f9af1ba954c83d701bcffa43b0, type: 2}
   m_SchemaSet:
