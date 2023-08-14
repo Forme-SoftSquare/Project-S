@@ -17,9 +17,9 @@ public abstract class Shape : MonoBehaviour
 
     public abstract void LoadSprite();
 
-    public abstract void MovementSkill();
+    public abstract void ActivateMovementSkill(PlayerController playerController);
 
-    public abstract void ActionSkill();
+    public abstract void ActivateActionSkill();
 
     public abstract void DestroyShape();
 }

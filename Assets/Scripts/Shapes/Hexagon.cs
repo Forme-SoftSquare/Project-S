@@ -9,12 +9,12 @@ public class Hexagon : Shape
         sprite = Addressables.LoadAssetAsync<Sprite>("Assets/Sprites/Shapes/Hexagon.png").WaitForCompletion();
     }
 
-    public override void MovementSkill()
+    public override void ActivateMovementSkill(PlayerController playerController)
     {
 
     }
 
-    public override void ActionSkill()
+    public override void ActivateActionSkill()
     {
 
     }

@@ -9,12 +9,12 @@ public class Square : Shape
         sprite = Addressables.LoadAssetAsync<Sprite>("Assets/Sprites/Shapes/Square.png").WaitForCompletion();
     }
 
-    public override void MovementSkill()
+    public override void ActivateMovementSkill(PlayerController playerController)
     {
 
     }
 
-    public override void ActionSkill()
+    public override void ActivateActionSkill()
     {
 
     }

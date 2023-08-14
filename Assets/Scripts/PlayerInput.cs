@@ -16,6 +16,8 @@ public class PlayerInput : MonoBehaviour
     internal bool isAlpha4Pressed;
     internal bool isAlpha5Pressed;
 
+    internal bool isMovementSkillPressed;
+
     // Update is called once per frame
     void Update()
     {
@@ -29,5 +31,7 @@ public class PlayerInput : MonoBehaviour
         isAlpha3Pressed = Input.GetKeyDown(KeyCode.Alpha3);
         isAlpha4Pressed = Input.GetKeyDown(KeyCode.Alpha4);
         isAlpha5Pressed = Input.GetKeyDown(KeyCode.Alpha5);
+
+        isMovementSkillPressed = Input.GetKeyDown(KeyCode.Q);
     }
 }
