@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 
 public class Triangle : Shape
 {
@@ -10,7 +9,7 @@ public class Triangle : Shape
 
     public override void LoadSprite()
     {
-        sprite = Addressables.LoadAssetAsync<Sprite>("Assets/Sprites/Shapes/Triangle.png").WaitForCompletion();
+        sprite = Resources.Load<Sprite>("Sprites/Shapes/Triangle");
     }
 
     public override void ActivateMovementSkill(PlayerController playerController)

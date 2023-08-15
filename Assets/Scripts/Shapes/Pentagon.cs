@@ -1,12 +1,11 @@
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 
 public class Pentagon : Shape
 {
 
     public override void LoadSprite()
     {
-        sprite = Addressables.LoadAssetAsync<Sprite>("Assets/Sprites/Shapes/Pentagon.png").WaitForCompletion();
+        sprite = Resources.Load<Sprite>("Sprites/Shapes/Pentagon");
     }
 
     public override void ActivateMovementSkill(PlayerController playerController)
