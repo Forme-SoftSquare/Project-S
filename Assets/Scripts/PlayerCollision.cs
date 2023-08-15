@@ -11,6 +11,7 @@ public class PlayerCollision : MonoBehaviour
         if (collision.gameObject.CompareTag("Platform"))
         {
             playerController.playerMovement.isJumping = false;
+            ResetAerialSkills();
         }
     }
 
@@ -21,5 +22,11 @@ public class PlayerCollision : MonoBehaviour
         {
             playerController.playerMovement.isJumping = true;
         }
+    }
+
+    private void ResetAerialSkills()
+    {
+        playerController.playerMovement.hasDoubleJumped = false;
+        playerController.playerMovement.isMovementSkillActive = false;
     }
 }

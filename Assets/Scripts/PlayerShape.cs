@@ -23,11 +23,11 @@ public class PlayerShape : MonoBehaviour
         }
         else if (playerController.playerInput.isAlpha2Pressed)
         {
-            ChangeShape(ShapeType.Square);
+            ChangeShape(ShapeType.Triangle);
         }
         else if (playerController.playerInput.isAlpha3Pressed)
         {
-            ChangeShape(ShapeType.Triangle);
+            ChangeShape(ShapeType.Square);
         }
         else if (playerController.playerInput.isAlpha4Pressed)
         {

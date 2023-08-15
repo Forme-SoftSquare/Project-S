@@ -1,20 +1,24 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
 public class Triangle : Shape
 {
 
+    private float dashForce = 60f;
+    private float dashDuration = 0.15f;
+
     public override void LoadSprite()
     {
         sprite = Addressables.LoadAssetAsync<Sprite>("Assets/Sprites/Shapes/Triangle.png").WaitForCompletion();
     }
 
-    public override void MovementSkill()
+    public override void ActivateMovementSkill(PlayerController playerController)
     {
-
+        StartCoroutine(Dash(playerController));
     }
 
-    public override void ActionSkill()
+    public override void ActivateActionSkill()
     {
 
     }
@@ -23,4 +27,17 @@ public class Triangle : Shape
     {
         Destroy(gameObject.GetComponent<Triangle>());
     }
+
+    private IEnumerator Dash(PlayerController playerController)
+{
+    Direction direction = playerController.playerMovement.direction;
+
+    Vector2 dashDirection = (direction == Direction.Left) ? Vector2.left : Vector2.right;
+    playerController.rb.velocity = dashDirection * dashForce;
+
+    // Wait for the dash to end
+    yield return new WaitForSeconds(dashDuration);
+
+    playerController.playerMovement.isMovementSkillActive = false;
+}
 }
