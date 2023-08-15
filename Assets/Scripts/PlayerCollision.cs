@@ -3,7 +3,12 @@ using UnityEngine;
 public class PlayerCollision : MonoBehaviour
 {
 
-    [SerializeField] private PlayerController playerController;
+    private PlayerController playerController;
+
+    void Start()
+    {
+        playerController = GetComponent<PlayerController>();
+    }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -26,7 +31,7 @@ public class PlayerCollision : MonoBehaviour
 
     private void ResetAerialSkills()
     {
-        playerController.playerMovement.hasDoubleJumped = false;
         playerController.playerMovement.isMovementSkillActive = false;
+        playerController.playerPassiveSkills.ResetAerialPassiveSkills();
     }
 }

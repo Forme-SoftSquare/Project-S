@@ -3,10 +3,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    [SerializeField] internal PlayerShape playerShape;
-    [SerializeField] internal PlayerInput playerInput;
-    [SerializeField] internal PlayerMovement playerMovement;
-    [SerializeField] internal PlayerCollision playerCollision;
+    internal PlayerShape playerShape;
+    internal PlayerInput playerInput;
+    internal PlayerMovement playerMovement;
+    internal PlayerCollision playerCollision;
+    internal PlayerPassiveSkills playerPassiveSkills;
 
     internal Rigidbody2D rb;
 
@@ -14,5 +15,11 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
+
+        playerShape = GetComponent<PlayerShape>();
+        playerInput = GetComponent<PlayerInput>();
+        playerMovement = GetComponent<PlayerMovement>();
+        playerCollision = GetComponent<PlayerCollision>();
+        playerPassiveSkills = GetComponent<PlayerPassiveSkills>();
     }
 }

@@ -4,7 +4,7 @@ public enum Direction { Left, Right }
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private PlayerController playerController;
+    private PlayerController playerController;
 
     internal Direction direction;
 
@@ -17,12 +17,13 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerController = GetComponent<PlayerController>();
+
         direction = Direction.Right;
 
         moveSpeed = 10f;
         jumpForce = 50f;
         isJumping = false;
-        hasDoubleJumped = false;
     }
 
     // Update is called once per frame
@@ -53,11 +54,9 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Double jump
-        bool isCircle = playerController.playerShape.shape.type == ShapeType.Circle;
-        bool canDoubleJump = isCircle && isJumping && !hasDoubleJumped;
-        if (playerController.playerInput.isUpPressed && canDoubleJump)
+        if (playerController.playerInput.isUpPressed && playerController.playerPassiveSkills.CanDoubleJump())
         {
-            hasDoubleJumped = true;
+            playerController.playerPassiveSkills.hasDoubleJumped = true;
             Jump();
         }
 

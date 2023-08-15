@@ -3,15 +3,16 @@ using UnityEngine;
 public class PlayerShape : MonoBehaviour
 {
 
-    [SerializeField] private PlayerController playerController;
+    private PlayerController playerController;
 
     private SpriteRenderer spriteRenderer;
     internal Shape shape;
 
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        playerController = GetComponent<PlayerController>();
 
+        spriteRenderer = GetComponent<SpriteRenderer>();
         ChangeShape(ShapeType.Circle);
     }
 
@@ -80,5 +81,10 @@ public class PlayerShape : MonoBehaviour
 
         // Set the sprite renderer's sprite to the new shape's sprite
         spriteRenderer.sprite = shape.sprite;
+    }
+
+    public bool IsShape(ShapeType shapeType)
+    {
+        return shapeType == shape?.type;
     }
 }
