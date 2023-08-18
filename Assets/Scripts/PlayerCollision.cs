@@ -12,26 +12,36 @@ public class PlayerCollision : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        // If player collides with a platform, set isJumping to false
-        if (collision.gameObject.CompareTag("Platform"))
+        switch (collision.gameObject.tag)
         {
-            playerController.playerMovement.isJumping = false;
-            ResetAerialSkills();
+            case "Platform":
+                playerController.playerMovement.isJumping = false;
+                ResetAerialSkills();
+                break;
+
+            case "Wall":
+                // Handle wall collision logic
+                break;
         }
     }
 
     void OnTriggerExit2D(Collider2D collision)
     {
-        // If player exits a platform, set isJumping to true
-        if (collision.gameObject.CompareTag("Platform"))
+        switch (collision.gameObject.tag)
         {
-            playerController.playerMovement.isJumping = true;
+            case "Platform":
+                playerController.playerMovement.isJumping = true;
+                break;
+
+            case "Wall":
+                // Handle wall collision logic
+                break;
         }
     }
 
     private void ResetAerialSkills()
     {
-        playerController.playerMovement.isMovementSkillActive = false;
+        playerController.playerShape.shape.ResetOnGround();
         playerController.playerPassiveSkills.ResetAerialPassiveSkills();
     }
 }

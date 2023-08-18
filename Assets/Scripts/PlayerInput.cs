@@ -39,6 +39,6 @@ public class PlayerInput : MonoBehaviour
         isAlpha4Pressed = Input.GetKeyDown(KeyCode.Alpha4);
         isAlpha5Pressed = Input.GetKeyDown(KeyCode.Alpha5);
 
-        isMovementSkillPressed = Input.GetKeyDown(KeyCode.Q);
+        isMovementSkillPressed = Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift);
     }
 }
