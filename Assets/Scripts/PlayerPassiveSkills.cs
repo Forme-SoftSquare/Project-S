@@ -5,14 +5,14 @@ public class PlayerPassiveSkills : MonoBehaviour
 
     private PlayerController playerController;
 
-    private bool hasDoubleJump;
+    private bool doubleJumpUnlocked;
     internal bool hasDoubleJumped;
 
     void Start()
     {
         playerController = GetComponent<PlayerController>();
 
-        hasDoubleJump = true;
+        doubleJumpUnlocked = true;
         hasDoubleJumped = false;
     }
 
@@ -20,7 +20,7 @@ public class PlayerPassiveSkills : MonoBehaviour
     {
         bool isCircle = playerController.playerShape.IsShape(ShapeType.Circle);
         bool isJumping = playerController.playerMovement.isJumping;
-        return hasDoubleJump && isCircle && isJumping && !hasDoubleJumped;
+        return doubleJumpUnlocked && isCircle && isJumping && !hasDoubleJumped;
     }
 
     public void ResetAerialPassiveSkills()
