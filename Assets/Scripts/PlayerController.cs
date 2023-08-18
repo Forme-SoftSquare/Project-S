@@ -9,12 +9,14 @@ public class PlayerController : MonoBehaviour
     internal PlayerCollision playerCollision;
     internal PlayerPassiveSkills playerPassiveSkills;
 
+    internal SpriteRenderer spriteRenderer;
     internal Rigidbody2D rb;
 
-    // Start is called before the first frame update
-    void Start()
+    // Awake is called before Start functions
+    void Awake()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 
         playerShape = GetComponent<PlayerShape>();
         playerInput = GetComponent<PlayerInput>();

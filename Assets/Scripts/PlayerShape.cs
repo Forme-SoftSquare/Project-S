@@ -5,14 +5,12 @@ public class PlayerShape : MonoBehaviour
 
     private PlayerController playerController;
 
-    private SpriteRenderer spriteRenderer;
     internal Shape shape;
 
     void Start()
     {
         playerController = GetComponent<PlayerController>();
 
-        spriteRenderer = GetComponent<SpriteRenderer>();
         ChangeShape(ShapeType.Circle);
     }
 
@@ -79,7 +77,7 @@ public class PlayerShape : MonoBehaviour
         shape.LoadSprite();
 
         // Set the sprite renderer's sprite to the new shape's sprite
-        spriteRenderer.sprite = shape.sprite;
+        playerController.spriteRenderer.sprite = shape.sprite;
     }
 
     public bool IsShape(ShapeType shapeType)
