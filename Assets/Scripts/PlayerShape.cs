@@ -43,7 +43,7 @@ public class PlayerShape : MonoBehaviour
     private void ChangeShape(ShapeType newShapeType)
     {
         // If the new shape is the same as the current shape, do nothing
-        if (newShapeType == shape?.type) return;
+        if (IsShape(newShapeType)) return;
 
         // Destroy the current player shape (if it already exists)
         shape?.DestroyShape();
@@ -55,13 +55,13 @@ public class PlayerShape : MonoBehaviour
                 shape = gameObject.AddComponent<Circle>();
                 shape.type = ShapeType.Circle;
                 break;
-            case ShapeType.Square:
-                shape = gameObject.AddComponent<Square>();
-                shape.type = ShapeType.Square;
-                break;
             case ShapeType.Triangle:
                 shape = gameObject.AddComponent<Triangle>();
                 shape.type = ShapeType.Triangle;
+                break;
+            case ShapeType.Square:
+                shape = gameObject.AddComponent<Square>();
+                shape.type = ShapeType.Square;
                 break;
             case ShapeType.Pentagon:
                 shape = gameObject.AddComponent<Pentagon>();
@@ -74,7 +74,6 @@ public class PlayerShape : MonoBehaviour
             default:
                 throw new System.Exception("Invalid shape type");
         }
-
 
         // Load the sprite for the new shape
         shape.LoadSprite();
