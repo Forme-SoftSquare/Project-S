@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
     internal PlayerInput playerInput;
     internal PlayerMovement playerMovement;
     internal PlayerCollision playerCollision;
-    internal PlayerPassiveSkills playerPassiveSkills;
 
     internal Rigidbody2D rb;
 
@@ -20,6 +19,5 @@ public class PlayerController : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         playerMovement = GetComponent<PlayerMovement>();
         playerCollision = GetComponent<PlayerCollision>();
-        playerPassiveSkills = GetComponent<PlayerPassiveSkills>();
     }
 }

@@ -16,7 +16,7 @@ public class PlayerCollision : MonoBehaviour
         {
             case "Platform":
                 playerController.playerMovement.isJumping = false;
-                ResetAerialSkills();
+                playerController.playerShape.shape.ResetOnGround();
                 break;
 
             case "Wall":
@@ -37,11 +37,5 @@ public class PlayerCollision : MonoBehaviour
                 // Handle wall collision logic
                 break;
         }
-    }
-
-    private void ResetAerialSkills()
-    {
-        playerController.playerShape.shape.ResetOnGround();
-        playerController.playerPassiveSkills.ResetAerialPassiveSkills();
     }
 }

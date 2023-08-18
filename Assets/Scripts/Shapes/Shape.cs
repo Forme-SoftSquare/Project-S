@@ -21,9 +21,11 @@ public abstract class Shape : MonoBehaviour
 
     public abstract void Initialize(PlayerController playerController);
 
-    public abstract void ActivateMovementSkill();
+    public abstract void HandlePassiveSkill();
 
-    public abstract void ActivateActionSkill();
+    public abstract void HandleMovementSkill();
+
+    public abstract void HandleActionSkill();
 
     public abstract void ResetOnGround();
 

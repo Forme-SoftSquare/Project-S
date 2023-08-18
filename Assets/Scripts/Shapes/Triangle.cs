@@ -15,15 +15,23 @@ public class Triangle : Shape
         sprite = Resources.Load<Sprite>("Sprites/Shapes/Triangle");
     }
 
-    public override void ActivateMovementSkill()
+    public override void HandlePassiveSkill()
     {
-        if (hasDashedInAir) return;
-        StartCoroutine(Dash());
+        // TODO: Implement passive skill
     }
 
-    public override void ActivateActionSkill()
+    public override void HandleMovementSkill()
     {
+        if (playerController.playerInput.isMovementSkillPressed && !isMovementSkillActive && !hasDashedInAir)
+        {
+            isMovementSkillActive = true;
+            StartCoroutine(Dash());
+        }
+    }
 
+    public override void HandleActionSkill()
+    {
+        // TODO: Implement action skill
     }
 
     public override void ResetOnGround()

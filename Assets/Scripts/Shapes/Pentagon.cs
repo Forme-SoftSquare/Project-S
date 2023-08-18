@@ -9,14 +9,19 @@ public class Pentagon : Shape
         sprite = Resources.Load<Sprite>("Sprites/Shapes/Pentagon");
     }
 
-    public override void ActivateMovementSkill()
+    public override void HandlePassiveSkill()
     {
-
+        // TODO: Implement passive skill
     }
 
-    public override void ActivateActionSkill()
+    public override void HandleMovementSkill()
     {
+        // TODO: Implement movement skill
+    }
 
+    public override void HandleActionSkill()
+    {
+        // TODO: Implement action skill
     }
 
     public override void ResetOnGround()

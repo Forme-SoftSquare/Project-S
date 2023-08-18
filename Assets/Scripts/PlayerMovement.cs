@@ -29,8 +29,8 @@ public class PlayerMovement : MonoBehaviour
     {
         HandleHorizontalMovement();
         HandleVerticalMovement();
-        HandleDoubleJump();
-        HandleMovementSkill();
+        playerController.playerShape.shape.HandlePassiveSkill();
+        playerController.playerShape.shape.HandleMovementSkill();
     }
 
     private void HandleHorizontalMovement()
@@ -65,17 +65,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayerRight()
     {
-        playerController.rb.velocity = new Vector2(moveSpeed, playerController.rb.velocity.y);
+        rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
         direction = Direction.Right;
     }
 
     private void MovePlayerLeft()
     {
-        playerController.rb.velocity = new Vector2(-1f * moveSpeed, playerController.rb.velocity.y);
+        rb.velocity = new Vector2(-1f * moveSpeed, rb.velocity.y);
         direction = Direction.Left;
     }
 
-    private void Jump()
+    public void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
     }
@@ -89,23 +89,5 @@ public class PlayerMovement : MonoBehaviour
     private void Descend()
     {
         rb.velocity = new Vector2(rb.velocity.x, -1f * jumpForce);
-    }
-
-    private void HandleDoubleJump()
-    {
-        if (playerController.playerInput.isUpPressed && playerController.playerPassiveSkills.CanDoubleJump())
-        {
-            playerController.playerPassiveSkills.hasDoubleJumped = true;
-            Jump();
-        }
-    }
-
-    private void HandleMovementSkill()
-    {
-        if (playerController.playerInput.isMovementSkillPressed && !playerController.playerShape.shape.isMovementSkillActive)
-        {
-            playerController.playerShape.shape.isMovementSkillActive = true;
-            playerController.playerShape.shape.ActivateMovementSkill();
-        }
     }
 }
