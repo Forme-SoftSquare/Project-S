@@ -28,15 +28,15 @@ public class Triangle : Shape
     }
 
     private IEnumerator Dash(PlayerController playerController)
-{
-    Direction direction = playerController.playerMovement.direction;
+    {
+        Direction direction = playerController.playerMovement.direction;
 
-    Vector2 dashDirection = (direction == Direction.Left) ? Vector2.left : Vector2.right;
-    playerController.rb.velocity = dashDirection * dashForce;
+        Vector2 dashDirection = (direction == Direction.Left) ? Vector2.left : Vector2.right;
+        playerController.rb.velocity = dashDirection * dashForce;
 
-    // Wait for the dash to end
-    yield return new WaitForSeconds(dashDuration);
+        // Wait for the dash to end
+        yield return new WaitForSeconds(dashDuration);
 
-    playerController.playerMovement.isMovementSkillActive = false;
-}
+        playerController.playerMovement.isMovementSkillActive = false;
+    }
 }

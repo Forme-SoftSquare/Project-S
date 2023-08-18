@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerInput : MonoBehaviour
 {
 
-    [SerializeField] private PlayerController playerController;
+    private PlayerController playerController;
 
     internal bool isLeftHeld;
     internal bool isRightHeld;
@@ -18,6 +18,11 @@ public class PlayerInput : MonoBehaviour
     internal bool isAlpha5Pressed;
 
     internal bool isMovementSkillPressed;
+
+    void Start()
+    {
+        playerController = GetComponent<PlayerController>();
+    }
 
     // Update is called once per frame
     void Update()
