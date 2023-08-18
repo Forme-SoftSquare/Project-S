@@ -31,11 +31,19 @@ public class Triangle : Shape
     {
         Direction direction = playerController.playerMovement.direction;
 
+        // Apllying visual effects
+        playerController.spriteRenderer.color = Color.red;
+        playerController.trailRenderer.emitting = true;
+
         Vector2 dashDirection = (direction == Direction.Left) ? Vector2.left : Vector2.right;
         playerController.rb.velocity = dashDirection * dashForce;
 
         // Wait for the dash to end
         yield return new WaitForSeconds(dashDuration);
+
+        // Resetting visual effects
+        playerController.spriteRenderer.color = Color.blue;
+        playerController.trailRenderer.emitting = false;
 
         playerController.playerMovement.isMovementSkillActive = false;
     }
