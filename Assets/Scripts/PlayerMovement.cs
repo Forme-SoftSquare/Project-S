@@ -5,23 +5,21 @@ public enum Direction { Left, Right }
 public class PlayerMovement : MonoBehaviour
 {
     private PlayerController playerController;
+    private Rigidbody2D rb;
 
     internal Direction direction;
-
     internal float moveSpeed;
     internal float jumpForce;
     internal bool isJumping;
-    internal bool isMovementSkillActive;
-    internal bool hasDoubleJumped;
 
     // Start is called before the first frame update
     void Start()
     {
         playerController = GetComponent<PlayerController>();
+        rb = playerController.rb;
 
         direction = Direction.Right;
-
-        moveSpeed = 10f;
+        moveSpeed = 15f;
         jumpForce = 50f;
         isJumping = false;
     }
@@ -29,7 +27,16 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Horizontal movements
+        HandleHorizontalMovement();
+        HandleVerticalMovement();
+        playerController.playerShape.shape.HandlePassiveSkill();
+        playerController.playerShape.shape.HandleMovementSkill();
+    }
+
+    private void HandleHorizontalMovement()
+    {
+        if (playerController.playerShape.shape.isMovementSkillActive) return;
+
         if (playerController.playerInput.isLeftHeld)
         {
             MovePlayerLeft();
@@ -38,68 +45,49 @@ public class PlayerMovement : MonoBehaviour
         {
             MovePlayerRight();
         }
+    }
 
-        // Vertical movements
+    private void HandleVerticalMovement()
+    {
         if (playerController.playerInput.isUpPressed && !isJumping)
         {
             Jump();
         }
-        if (playerController.playerInput.isUpReleased && playerController.rb.velocity.y > 0f)
+        else if (playerController.playerInput.isUpReleased && rb.velocity.y > 0f)
         {
             ApplyJumpReleaseVelocity();
         }
-        if (playerController.playerInput.isDownHeld && isJumping)
+        else if (playerController.playerInput.isDownHeld && isJumping)
         {
             Descend();
-        }
-
-        // Double jump
-        if (playerController.playerInput.isUpPressed && playerController.playerPassiveSkills.CanDoubleJump())
-        {
-            playerController.playerPassiveSkills.hasDoubleJumped = true;
-            Jump();
-        }
-
-        // Player skills
-        if (playerController.playerInput.isMovementSkillPressed && !isMovementSkillActive)
-        {
-            ActivateMovementSkill();
         }
     }
 
     private void MovePlayerRight()
     {
-        if (isMovementSkillActive) return;
-        playerController.rb.velocity = new Vector2(moveSpeed, playerController.rb.velocity.y);
+        rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
         direction = Direction.Right;
     }
 
     private void MovePlayerLeft()
     {
-        if (isMovementSkillActive) return;
-        playerController.rb.velocity = new Vector2(-1f * moveSpeed, playerController.rb.velocity.y);
+        rb.velocity = new Vector2(-1f * moveSpeed, rb.velocity.y);
         direction = Direction.Left;
     }
 
-    private void Jump()
+    public void Jump()
     {
-        playerController.rb.velocity = new Vector2(playerController.rb.velocity.x, jumpForce);
+        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
     }
 
     private void ApplyJumpReleaseVelocity()
     {
         float jumpDeceleration = 0.5f;
-        playerController.rb.velocity = new Vector2(playerController.rb.velocity.x, playerController.rb.velocity.y * jumpDeceleration);
+        rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * jumpDeceleration);
     }
 
     private void Descend()
     {
-        playerController.rb.velocity = new Vector2(playerController.rb.velocity.x, -1f * jumpForce);
-    }
-
-    private void ActivateMovementSkill()
-    {
-        isMovementSkillActive = true;
-        playerController.playerShape.shape.ActivateMovementSkill(playerController);
+        rb.velocity = new Vector2(rb.velocity.x, -1f * jumpForce);
     }
 }

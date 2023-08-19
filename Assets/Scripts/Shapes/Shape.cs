@@ -11,15 +11,29 @@ public enum ShapeType
 
 public abstract class Shape : MonoBehaviour
 {
+    protected PlayerController playerController;
 
     internal ShapeType type;
     internal Sprite sprite;
 
-    public abstract void LoadSprite();
+    internal bool isMovementSkillActive = false;
+    internal bool isActionSkillActive = false;
 
-    public abstract void ActivateMovementSkill(PlayerController playerController);
+    public abstract void Initialize(PlayerController playerController);
 
-    public abstract void ActivateActionSkill();
+    public abstract void HandlePassiveSkill();
+
+    public abstract void HandleMovementSkill();
+
+    public abstract void HandleActionSkill();
+
+    public abstract void ResetOnGround();
 
     public abstract void DestroyShape();
+
+    protected void ClearSkills()
+    {
+        isMovementSkillActive = false;
+        isActionSkillActive = false;
+    }
 }
