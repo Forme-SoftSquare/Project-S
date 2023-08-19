@@ -802,8 +802,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1447817177
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0.07986283, b: 1, a: 1}
@@ -921,10 +921,10 @@ TrailRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 778454645
+  m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Time: 0.2
+  m_Time: 0.15
   m_PreviewTimeScale: 0.37
   m_Parameters:
     serializedVersion: 3
@@ -942,7 +942,7 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.50000006
+        time: 0.19999996
         value: 0
         inSlope: 0
         outSlope: 0
@@ -956,7 +956,7 @@ TrailRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 0, g: 0, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 0}
+      key1: {r: 0, g: 0, b: 1, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -990,7 +990,7 @@ TrailRenderer:
     textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
-  m_MinVertexDistance: 0.05
+  m_MinVertexDistance: 0.7
   m_MaskInteraction: 0
   m_Autodestruct: 0
   m_Emitting: 0
