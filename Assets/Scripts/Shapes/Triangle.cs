@@ -4,22 +4,40 @@ using UnityEngine;
 public class Triangle : Shape
 {
 
-    private float dashForce = 60f;
-    private float dashDuration = 0.15f;
+    private readonly float dashForce = 80f;
+    private readonly float dashDuration = 0.15f;
 
-    public override void LoadSprite()
+    private bool hasDashedInAir = false;
+
+    public override void Initialize(PlayerController playerController)
     {
+        this.playerController = playerController;
         sprite = Resources.Load<Sprite>("Sprites/Shapes/Triangle");
     }
 
-    public override void ActivateMovementSkill(PlayerController playerController)
+    public override void HandlePassiveSkill()
     {
-        StartCoroutine(Dash(playerController));
+        // TODO: Implement passive skill
     }
 
-    public override void ActivateActionSkill()
+    public override void HandleMovementSkill()
     {
+        if (playerController.playerInput.isMovementSkillPressed && !isMovementSkillActive && !hasDashedInAir)
+        {
+            isMovementSkillActive = true;
+            StartCoroutine(Dash());
+        }
+    }
 
+    public override void HandleActionSkill()
+    {
+        // TODO: Implement action skill
+    }
+
+    public override void ResetOnGround()
+    {
+        ClearSkills();
+        hasDashedInAir = false;
     }
 
     public override void DestroyShape()
@@ -27,7 +45,7 @@ public class Triangle : Shape
         Destroy(gameObject.GetComponent<Triangle>());
     }
 
-    private IEnumerator Dash(PlayerController playerController)
+    private IEnumerator Dash()
     {
         Direction direction = playerController.playerMovement.direction;
 
@@ -37,6 +55,11 @@ public class Triangle : Shape
         // Wait for the dash to end
         yield return new WaitForSeconds(dashDuration);
 
-        playerController.playerMovement.isMovementSkillActive = false;
+        isMovementSkillActive = false;
+
+        if (playerController.playerMovement.isJumping)
+        {
+            hasDashedInAir = true;
+        }
     }
 }
