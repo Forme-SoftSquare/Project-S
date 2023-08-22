@@ -51,7 +51,7 @@ public class Triangle : Shape
         Direction horizontalDirection = playerController.playerMovement.direction;
 
         // Check if the 'up' input is currently pressed
-        bool isUpPressed = playerController.playerInput.isUpPressed;
+        bool isUpHeld = playerController.playerInput.isUpHeld;
 
         // Applying visual effects for dashing
         playerController.spriteRenderer.color = Color.red;           // Change player color to red for the dash duration
@@ -64,13 +64,13 @@ public class Triangle : Shape
         {
             // If the player is facing left and pressing 'up', they will dash diagonally upwards to the left
             // Otherwise, they'll dash straight to the left
-            dashDirection = isUpPressed ? new Vector2(-1, 1).normalized : Vector2.left;
+            dashDirection = isUpHeld ? new Vector2(-1, 1).normalized : Vector2.left;
         }
         else // If horizontalDirection is Right
         {
             // If the player is facing right and pressing 'up', they will dash diagonally upwards to the right
             // Otherwise, they'll dash straight to the right
-            dashDirection = isUpPressed ? new Vector2(1, 1).normalized : Vector2.right;
+            dashDirection = isUpHeld ? new Vector2(1, 1).normalized : Vector2.right;
         }
 
         // Apply the dash velocity to the player's Rigidbody
