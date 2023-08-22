@@ -57,20 +57,17 @@ public class Triangle : Shape
         playerController.spriteRenderer.color = Color.red;           // Change player color to red for the dash duration
         playerController.trailRenderer.emitting = true;              // Turn on the trail renderer to show a "dash trail"
 
-        Vector2 dashDirection;
+        // Determine the horizontal multiplier based on the player's direction
+        int horizontalMultiplier = (horizontalDirection == Direction.Left) ? -1 : 1;
 
-        // Determine the dash direction based on the player's current horizontal direction and if 'up' is being pressed
-        if (horizontalDirection == Direction.Left)
+        // Determine the dash direction
+        Vector2 dashDirection = Vector2.right * horizontalMultiplier;
+
+        // If 'up' is held, adjust the dash direction diagonally
+        if (isUpHeld)
         {
-            // If the player is facing left and pressing 'up', they will dash diagonally upwards to the left
-            // Otherwise, they'll dash straight to the left
-            dashDirection = isUpHeld ? new Vector2(-1, 1).normalized : Vector2.left;
-        }
-        else // If horizontalDirection is Right
-        {
-            // If the player is facing right and pressing 'up', they will dash diagonally upwards to the right
-            // Otherwise, they'll dash straight to the right
-            dashDirection = isUpHeld ? new Vector2(1, 1).normalized : Vector2.right;
+            dashDirection += Vector2.up;
+            dashDirection.Normalize();
         }
 
         // Apply the dash velocity to the player's Rigidbody
