@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     internal Direction direction;
     internal float moveSpeed;
     internal float jumpForce;
-    public bool isJumping;
+    internal bool isJumping;
 
     // Start is called before the first frame update
     void Start()

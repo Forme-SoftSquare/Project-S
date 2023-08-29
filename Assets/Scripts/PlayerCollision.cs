@@ -5,9 +5,9 @@ public class PlayerCollision : MonoBehaviour
 
     private PlayerController playerController;
 
-    public bool isTouchingLeftWall;
-    public bool isTouchingRightWall;
-    public bool isGrounded;
+    internal bool isTouchingLeftWall;
+    internal bool isTouchingRightWall;
+    internal bool isGrounded;
 
     void Start()
     {
