@@ -7,6 +7,7 @@ public class Pentagon : Shape
     {
         this.playerController = playerController;
         sprite = Resources.Load<Sprite>("Sprites/Shapes/Pentagon");
+        stats = new ShapeStats(12, 4, 12);
     }
 
     public override void HandlePassiveSkill()

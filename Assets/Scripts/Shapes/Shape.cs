@@ -16,6 +16,8 @@ public abstract class Shape : MonoBehaviour
     internal ShapeType type;
     internal Sprite sprite;
 
+    internal ShapeStats stats;
+
     internal bool isMovementSkillActive = false;
     internal bool isActionSkillActive = false;
 

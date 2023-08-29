@@ -8,7 +8,6 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
 
     internal Direction direction;
-    internal float moveSpeed;
     internal float jumpForce;
     internal bool isJumping;
 
@@ -19,7 +18,6 @@ public class PlayerMovement : MonoBehaviour
         rb = playerController.rb;
 
         direction = Direction.Right;
-        moveSpeed = 15f;
         jumpForce = 50f;
         isJumping = false;
     }
@@ -65,13 +63,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayerRight()
     {
-        rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
+        int speed = playerController.playerShape.shape.stats.speed;
+        rb.velocity = new Vector2(speed, rb.velocity.y);
         direction = Direction.Right;
     }
 
     private void MovePlayerLeft()
     {
-        rb.velocity = new Vector2(-1f * moveSpeed, rb.velocity.y);
+        int speed = playerController.playerShape.shape.stats.speed;
+        rb.velocity = new Vector2(-1f * speed, rb.velocity.y);
         direction = Direction.Left;
     }
 

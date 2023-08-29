@@ -13,6 +13,7 @@ public class Triangle : Shape
     {
         this.playerController = playerController;
         sprite = Resources.Load<Sprite>("Sprites/Shapes/Triangle");
+        stats = new ShapeStats(16, 4, 20);
     }
 
     public override void HandlePassiveSkill()
