@@ -20,7 +20,7 @@ public class Circle : Shape
         if (isUpPressed && isJumping && doubleJumpUnlocked && !hasDoubleJumped)
         {
             hasDoubleJumped = true;
-            playerController.playerMovement.Jump();
+            StartCoroutine(playerController.playerMovement.JumpCoroutine());
         }
     }
 

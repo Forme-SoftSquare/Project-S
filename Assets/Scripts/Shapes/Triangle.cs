@@ -25,8 +25,7 @@ public class Triangle : Shape
     {
         if (playerController.playerInput.isMovementSkillPressed && !isMovementSkillActive && !hasDashedInAir)
         {
-            isMovementSkillActive = true;
-            StartCoroutine(Dash());
+            StartCoroutine(DashCoroutine());
         }
     }
 
@@ -46,8 +45,10 @@ public class Triangle : Shape
         Destroy(gameObject.GetComponent<Triangle>());
     }
 
-    private IEnumerator Dash()
+    private void Dash()
     {
+        isMovementSkillActive = true;
+
         // Determine the current horizontal direction the player is facing (either Left or Right)
         Direction horizontalDirection = playerController.playerMovement.direction;
 
@@ -73,13 +74,13 @@ public class Triangle : Shape
 
         // Apply the dash velocity to the player's Rigidbody
         playerController.rb.velocity = dashDirection * dashForce;
+    }
 
-        // Wait for a set duration (dashDuration) before ending the dash
-        yield return new WaitForSeconds(dashDuration);
-
+    private void ClearDash()
+    {
         // Reset the visual effects after dashing
-        playerController.spriteRenderer.color = Color.blue;          // Reset player color back to blue after dashing
-        playerController.trailRenderer.emitting = false;             // Turn off the trail renderer
+        playerController.spriteRenderer.color = Color.blue;  // Reset player color back to blue after dashing
+        playerController.trailRenderer.emitting = false;     // Turn off the trail renderer
 
         // Set the movement skill flag to false, indicating that the dash has ended
         isMovementSkillActive = false;
@@ -89,5 +90,15 @@ public class Triangle : Shape
         {
             hasDashedInAir = true;
         }
+    }
+
+    private IEnumerator DashCoroutine()
+    {
+        Dash();
+
+        // Wait for a set duration (dashDuration) before ending the dash
+        yield return new WaitForSeconds(dashDuration);
+
+        ClearDash();
     }
 }
