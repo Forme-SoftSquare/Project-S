@@ -62,10 +62,6 @@ public class PlayerMovement : MonoBehaviour
         {
             ApplyJumpReleaseVelocity();
         }
-        else if (playerController.playerInput.isDownHeld && isJumping)
-        {
-            Descend();
-        }
     }
 
     private void MovePlayerRight()
@@ -138,11 +134,6 @@ public class PlayerMovement : MonoBehaviour
     {
         float jumpDeceleration = 0.5f;
         rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * jumpDeceleration);
-    }
-
-    private void Descend()
-    {
-        rb.velocity = new Vector2(rb.velocity.x, -1f * jumpForce);
     }
 
     private bool CanNotMove()
