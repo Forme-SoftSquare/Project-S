@@ -63,14 +63,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayerRight()
     {
-        int speed = playerController.playerShape.shape.stats.Speed;
+        int speed = playerController.playerShape.shape.stats.moveSpeed;
         rb.velocity = new Vector2(speed, rb.velocity.y);
         direction = Direction.Right;
     }
 
     private void MovePlayerLeft()
     {
-        int speed = playerController.playerShape.shape.stats.Speed;
+        int speed = playerController.playerShape.shape.stats.moveSpeed;
         rb.velocity = new Vector2(-1f * speed, rb.velocity.y);
         direction = Direction.Left;
     }

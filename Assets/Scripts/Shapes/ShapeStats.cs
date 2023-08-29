@@ -4,21 +4,18 @@ using UnityEngine;
 
 public class ShapeStats
 {
-    // Stats / 100
+    // Stats /100
     internal int attack;
     internal int defense;
-    private int speed;
+    internal int speed;
+
+    // speed used for movement
+    internal int moveSpeed => speed /5;
 
     public ShapeStats(int attack, int defense, int speed)
     {
         this.attack = attack;
         this.defense = defense;
-        this.Speed = speed;
-    }
-
-    public int Speed
-    {
-        get { return speed / 5; }
-        private set { speed = value; }
+        this.speed = speed;
     }
 }
