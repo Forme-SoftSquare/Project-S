@@ -7,7 +7,7 @@ public class Square : Shape
     {
         this.playerController = playerController;
         sprite = Resources.Load<Sprite>("Sprites/Shapes/Square");
-        stats = new ShapeStats(12, 20, 8);
+        stats = new ShapeStats(60, 100, 40);
     }
 
     public override void HandlePassiveSkill()

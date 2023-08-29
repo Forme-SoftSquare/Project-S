@@ -10,7 +10,7 @@ public class Circle : Shape
     {
         this.playerController = playerController;
         sprite = Resources.Load<Sprite>("Sprites/Shapes/Circle");
-        stats = new ShapeStats(10, 10, 5);
+        stats = new ShapeStats(50, 50, 50);
     }
 
     public override void HandlePassiveSkill()

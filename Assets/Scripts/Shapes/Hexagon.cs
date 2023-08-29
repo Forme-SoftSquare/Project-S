@@ -7,7 +7,7 @@ public class Hexagon : Shape
     {
         this.playerController = playerController;
         sprite = Resources.Load<Sprite>("Sprites/Shapes/Hexagon");
-        stats = new ShapeStats(8, 16, 16);
+        stats = new ShapeStats(40, 80, 80);
     }
 
     public override void HandlePassiveSkill()
