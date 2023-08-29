@@ -27,7 +27,7 @@ public abstract class Shape : MonoBehaviour
 
     public abstract void HandleActionSkill();
 
-    public abstract void ResetOnGround();
+    public abstract void ResetOnCollision();
 
     public abstract void DestroyShape();
 

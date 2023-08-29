@@ -27,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (playerController.playerShape.shape.isMovementSkillActive) return;
+
         HandleHorizontalMovement();
         HandleVerticalMovement();
         playerController.playerShape.shape.HandlePassiveSkill();
@@ -35,8 +37,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleHorizontalMovement()
     {
-        if (playerController.playerShape.shape.isMovementSkillActive) return;
-
         if (playerController.playerInput.isLeftHeld)
         {
             MovePlayerLeft();
@@ -51,7 +51,14 @@ public class PlayerMovement : MonoBehaviour
     {
         if (playerController.playerInput.isUpPressed && !isJumping)
         {
-            Jump();
+            if (playerController.PlayerCollision.ShouldWallJump())
+            {
+                // wall jump
+            }
+            else
+            {
+                Jump();
+            }
         }
         else if (playerController.playerInput.isUpReleased && rb.velocity.y > 0f)
         {
