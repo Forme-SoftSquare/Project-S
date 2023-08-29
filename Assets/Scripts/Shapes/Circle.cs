@@ -33,7 +33,7 @@ public class Circle : Shape
         // TODO: Implement action skill
     }
 
-    public override void ResetOnGround()
+    public override void ResetOnCollision()
     {
         ClearSkills();
         hasDoubleJumped = false;

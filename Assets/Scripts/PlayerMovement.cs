@@ -27,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (playerController.playerShape.shape.isMovementSkillActive) return;
+
         HandleHorizontalMovement();
         HandleVerticalMovement();
         playerController.playerShape.shape.HandlePassiveSkill();
@@ -35,8 +37,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleHorizontalMovement()
     {
-        if (playerController.playerShape.shape.isMovementSkillActive) return;
-
         if (playerController.playerInput.isLeftHeld)
         {
             MovePlayerLeft();
@@ -51,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (playerController.playerInput.isUpPressed && !isJumping)
         {
-            Jump();
+            HandleJump();
         }
         else if (playerController.playerInput.isUpReleased && rb.velocity.y > 0f)
         {
@@ -75,9 +75,36 @@ public class PlayerMovement : MonoBehaviour
         direction = Direction.Left;
     }
 
+    private void HandleJump()
+    {
+        if (!playerController.playerCollision.ShouldWallJump())
+        {
+            Jump();
+        }
+        else if (playerController.playerCollision.isTouchingRightWall)
+        {
+            WallJump(Vector2.right);
+        }
+        else if (playerController.playerCollision.isTouchingLeftWall)
+        {
+            WallJump(Vector2.left);
+        }
+    }
+
     public void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+    }
+
+    private void WallJump(Vector2 wallDirection)
+    {
+        Vector2 upVector = Vector2.up;
+
+        // Combine the wall normal vector with the up vector to get a diagonal upward jump direction
+        Vector2 jumpDirection = (wallDirection + upVector).normalized;
+
+        // Apply a jump force in the diagonal jump direction
+        rb.velocity = jumpDirection * jumpForce;
     }
 
     private void ApplyJumpReleaseVelocity()
