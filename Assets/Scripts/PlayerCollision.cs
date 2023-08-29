@@ -61,14 +61,21 @@ public class PlayerCollision : MonoBehaviour
         return collision.gameObject.CompareTag(tag);
     }
 
-    public bool IsPlayerOnLeftSideOfWall(Collider2D collision)
+    private bool IsPlayerOnLeftSideOfWall(Collider2D collision)
     {
         return transform.position.x < collision.transform.position.x;
     }
 
-    public bool IsPlayerOnRightSideOfWall(Collider2D collision)
+    private bool IsPlayerOnRightSideOfWall(Collider2D collision)
     {
         return transform.position.x > collision.transform.position.x;
+    }
+
+    public Vector2 GetWallDirectionVector()
+    {
+        if (isTouchingRightWall) return Vector2.right;
+        else if (isTouchingLeftWall) return Vector2.left;
+        else return Vector2.zero;
     }
 
     private bool IsTouchingWall()

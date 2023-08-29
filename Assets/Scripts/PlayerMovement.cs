@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public enum Direction { Left, Right }
 
@@ -11,6 +12,9 @@ public class PlayerMovement : MonoBehaviour
     internal float jumpForce;
     internal bool isJumping;
 
+    private bool isJumpActive;
+    private float jumpDuration;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,12 +24,15 @@ public class PlayerMovement : MonoBehaviour
         direction = Direction.Right;
         jumpForce = 50f;
         isJumping = false;
+
+        isJumpActive = false;
+        jumpDuration = 0.05f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (playerController.playerShape.shape.isMovementSkillActive) return;
+        if (CanNotMove()) return;
 
         HandleHorizontalMovement();
         HandleVerticalMovement();
@@ -77,21 +84,19 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleJump()
     {
-        if (!playerController.playerCollision.ShouldWallJump())
+        if (!playerController.playerInput.isUpPressed || isJumping) return;
+
+        if (playerController.playerCollision.ShouldWallJump())
         {
-            Jump();
+            StartCoroutine(WallJumpCoroutine());
         }
-        else if (playerController.playerCollision.isTouchingRightWall)
+        else
         {
-            WallJump(Vector2.right);
-        }
-        else if (playerController.playerCollision.isTouchingLeftWall)
-        {
-            WallJump(Vector2.left);
+            StartCoroutine(JumpCoroutine());
         }
     }
 
-    public void Jump()
+    private void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
     }
@@ -107,6 +112,28 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = jumpDirection * jumpForce;
     }
 
+    public IEnumerator JumpCoroutine()
+    {
+        isJumpActive = true;
+        Jump();
+
+        // add a small delay before allowing the player to jump again
+        yield return new WaitForSeconds(jumpDuration);
+        isJumpActive = false;
+    }
+
+    private IEnumerator WallJumpCoroutine()
+    {
+        Vector2 wallDirection = playerController.playerCollision.GetWallDirectionVector();
+
+        isJumpActive = true;
+        WallJump(wallDirection);
+        
+        // add a small delay before allowing the player to jump again
+        yield return new WaitForSeconds(jumpDuration);
+        isJumpActive = false;
+    }
+
     private void ApplyJumpReleaseVelocity()
     {
         float jumpDeceleration = 0.5f;
@@ -116,5 +143,11 @@ public class PlayerMovement : MonoBehaviour
     private void Descend()
     {
         rb.velocity = new Vector2(rb.velocity.x, -1f * jumpForce);
+    }
+
+    private bool CanNotMove()
+    {
+        bool isMovementSkillActive = playerController.playerShape.shape.isMovementSkillActive;
+        return isMovementSkillActive || isJumpActive;
     }
 }
