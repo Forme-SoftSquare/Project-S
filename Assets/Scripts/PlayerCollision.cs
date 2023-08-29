@@ -5,13 +5,16 @@ public class PlayerCollision : MonoBehaviour
 
     private PlayerController playerController;
 
-    // var to know if player touch a wall and he is not on the ground
-    internal bool isTouchingWall;
-    internal bool isGrounded;
+    public bool isTouchingLeftWall;
+    public bool isTouchingRightWall;
+    public bool isGrounded;
 
     void Start()
     {
         playerController = GetComponent<PlayerController>();
+        isTouchingLeftWall = false;
+        isTouchingRightWall = false;
+        isGrounded = true;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -19,13 +22,12 @@ public class PlayerCollision : MonoBehaviour
         bool isTagPlatform = CompareTag(collision, "Platform");
         bool isTagWall = CompareTag(collision, "Wall");
 
-        if (isTagPlatform)
-        {
-            playerController.playerMovement.isGrounded = true;
-        }
+        if (isTagPlatform) isGrounded = true;
+
         if (isTagWall)
         {
-            playerController.playerMovement.isTouchingWall = true;
+            if (IsPlayerOnLeftSideOfWall(collision)) isTouchingLeftWall = true;
+            else if (IsPlayerOnRightSideOfWall(collision)) isTouchingRightWall = true;
         }
 
         if (isTagPlatform || isTagWall)
@@ -40,23 +42,21 @@ public class PlayerCollision : MonoBehaviour
         bool isTagPlatform = CompareTag(collision, "Platform");
         bool isTagWall = CompareTag(collision, "Wall");
 
-        if (isTagPlatform)
-        {
-            playerController.playerMovement.isGrounded = false;
-        }
+        if (isTagPlatform) isGrounded = false;
+
         if (isTagWall)
         {
-            playerController.playerMovement.isTouchingWall = false;
+            if (IsPlayerOnLeftSideOfWall(collision)) isTouchingLeftWall = false;
+            else if (IsPlayerOnRightSideOfWall(collision)) isTouchingRightWall = false;
         }
-    
 
-        if (isTagPlatform || isTagWall)
+        if ((isTagPlatform && !IsTouchingWall()) || (isTagWall && !isGrounded))
         {
             playerController.playerMovement.isJumping = true;
         }
     }
 
-    private CompareTag(Collider2D collision, string tag)
+    private bool CompareTag(Collider2D collision, string tag)
     {
         return collision.gameObject.CompareTag(tag);
     }
@@ -71,8 +71,13 @@ public class PlayerCollision : MonoBehaviour
         return transform.position.x > collision.transform.position.x;
     }
 
+    private bool IsTouchingWall()
+    {
+        return isTouchingLeftWall || isTouchingRightWall;
+    }
+
     public bool ShouldWallJump()
     {
-        return isTouchingWall && !isGrounded;
+        return IsTouchingWall()  && !isGrounded;
     }
 }
