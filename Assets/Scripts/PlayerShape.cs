@@ -16,6 +16,8 @@ public class PlayerShape : MonoBehaviour
 
     void Update()
     {
+        if (shape.IsSkillActive()) return;
+
         if (playerController.playerInput.isAlpha1Pressed)
         {
             ChangeShape(ShapeType.Circle);
