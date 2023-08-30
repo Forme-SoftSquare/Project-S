@@ -27,7 +27,13 @@ public class Pentagon : Shape
 
     public override void ResetOnCollision()
     {
-        ClearSkills();
+        // TODO: Implement reset on collision
+    }
+
+    public override bool IsBlockingSkillActive()
+    {
+        // TODO: Implement blocking skill
+        return false;
     }
 
     public override void DestroyShape()

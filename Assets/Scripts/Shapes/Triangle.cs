@@ -8,6 +8,7 @@ public class Triangle : Shape
     private readonly float dashDuration = 0.15f;
 
     private bool hasDashedInAir = false;
+    private bool isDashActive = false;
 
     public override void Initialize(PlayerController playerController)
     {
@@ -23,7 +24,10 @@ public class Triangle : Shape
 
     public override void HandleMovementSkill()
     {
-        if (playerController.playerInput.isMovementSkillPressed && !isMovementSkillActive && !hasDashedInAir)
+        bool canMove = playerController.playerMovement.CanMove();
+        bool isMovementSkillPressed = playerController.playerInput.isMovementSkillPressed;
+
+        if (canMove && isMovementSkillPressed && !hasDashedInAir)
         {
             StartCoroutine(DashCoroutine());
         }
@@ -36,8 +40,13 @@ public class Triangle : Shape
 
     public override void ResetOnCollision()
     {
-        ClearSkills();
         hasDashedInAir = false;
+        isDashActive = false;
+    }
+
+    public override bool IsBlockingSkillActive()
+    {
+        return isDashActive;
     }
 
     public override void DestroyShape()
@@ -47,7 +56,7 @@ public class Triangle : Shape
 
     private void Dash()
     {
-        isMovementSkillActive = true;
+        isDashActive = true;
 
         // Determine the current horizontal direction the player is facing (either Left or Right)
         Direction horizontalDirection = playerController.playerMovement.direction;
@@ -83,7 +92,7 @@ public class Triangle : Shape
         playerController.trailRenderer.emitting = false;     // Turn off the trail renderer
 
         // Set the movement skill flag to false, indicating that the dash has ended
-        isMovementSkillActive = false;
+        isDashActive = false;
 
         // Check if the player was jumping while dashing, and set a flag if true
         if (playerController.playerMovement.isInAir)
