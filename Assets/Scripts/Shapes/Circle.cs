@@ -16,8 +16,8 @@ public class Circle : Shape
     public override void HandlePassiveSkill()
     {
         bool isUpPressed = playerController.playerInput.isUpPressed;
-        bool isJumping = playerController.playerMovement.isJumping;
-        if (isUpPressed && isJumping && doubleJumpUnlocked && !hasDoubleJumped)
+        bool isInAir = playerController.playerMovement.isInAir;
+        if (isUpPressed && isInAir && doubleJumpUnlocked && !hasDoubleJumped)
         {
             hasDoubleJumped = true;
             StartCoroutine(playerController.playerMovement.JumpCoroutine());

@@ -32,7 +32,7 @@ public class PlayerCollision : MonoBehaviour
 
         if (isTagPlatform || isTagWall)
         {
-            playerController.playerMovement.isJumping = false;
+            playerController.playerMovement.isInAir = false;
             playerController.playerShape.shape.ResetOnCollision();
         }
     }
@@ -52,7 +52,7 @@ public class PlayerCollision : MonoBehaviour
 
         if ((isTagPlatform && !IsTouchingWall()) || (isTagWall && !isGrounded))
         {
-            playerController.playerMovement.isJumping = true;
+            playerController.playerMovement.isInAir = true;
         }
     }
 
