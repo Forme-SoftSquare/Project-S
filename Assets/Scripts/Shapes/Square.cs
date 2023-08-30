@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 
 public class Square : Shape
 {
@@ -48,19 +47,5 @@ public class Square : Shape
     {
         Rigidbody2D rb = playerController.rb;
         rb.velocity = new Vector2(rb.velocity.x, -1f * groundPoundForce);
-    }
-
-    private IEnumerator GroundPoundCoroutine()
-    {
-        Rigidbody2D rb = playerController.rb;
-
-        // add contstant descending force until the player hits the ground
-        while (!playerController.playerCollision.isGrounded)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, -1f * groundPoundForce);
-            
-            // wait for the next frame
-            yield return null;
-        }
     }
 }
