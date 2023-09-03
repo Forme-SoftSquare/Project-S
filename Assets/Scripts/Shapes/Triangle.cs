@@ -86,7 +86,7 @@ public class Triangle : Shape
         isMovementSkillActive = false;
 
         // Check if the player was jumping while dashing, and set a flag if true
-        if (playerController.playerMovement.isJumping)
+        if (playerController.playerMovement.isInAir)
         {
             hasDashedInAir = true;
         }

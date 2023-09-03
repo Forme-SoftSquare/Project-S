@@ -3,6 +3,8 @@ using UnityEngine;
 public class Square : Shape
 {
 
+    private readonly float groundPoundForce = 40f;
+
     public override void Initialize(PlayerController playerController)
     {
         this.playerController = playerController;
@@ -12,7 +14,13 @@ public class Square : Shape
 
     public override void HandlePassiveSkill()
     {
-        // TODO: Implement passive skill
+        bool isInAir = playerController.playerMovement.isInAir;
+        bool isDownHeld = playerController.playerInput.isDownHeld;
+        if (isInAir && isDownHeld)
+        {
+            isPassiveSkillActive = true;
+            GroundPound();
+        }
     }
 
     public override void HandleMovementSkill()
@@ -33,5 +41,11 @@ public class Square : Shape
     public override void DestroyShape()
     {
         Destroy(gameObject.GetComponent<Square>());
+    }
+
+    private void GroundPound()
+    {
+        Rigidbody2D rb = playerController.rb;
+        rb.velocity = new Vector2(rb.velocity.x, -1f * groundPoundForce);
     }
 }

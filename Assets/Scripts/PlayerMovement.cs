@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
 
     internal Direction direction;
     internal float jumpForce;
-    internal bool isJumping;
+    internal bool isInAir;
 
     private bool isJumpActive;
     private float jumpDuration;
@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
 
         direction = Direction.Right;
         jumpForce = 50f;
-        isJumping = false;
+        isInAir = false;
 
         isJumpActive = false;
         jumpDuration = 0.05f;
@@ -54,17 +54,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleVerticalMovement()
     {
-        if (playerController.playerInput.isUpPressed && !isJumping)
+        if (playerController.playerInput.isUpPressed && !isInAir)
         {
             HandleJump();
         }
         else if (playerController.playerInput.isUpReleased && rb.velocity.y > 0f)
         {
             ApplyJumpReleaseVelocity();
-        }
-        else if (playerController.playerInput.isDownHeld && isJumping)
-        {
-            Descend();
         }
     }
 
@@ -84,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleJump()
     {
-        if (!playerController.playerInput.isUpPressed || isJumping) return;
+        if (!playerController.playerInput.isUpPressed || isInAir) return;
 
         if (playerController.playerCollision.ShouldWallJump())
         {
@@ -140,14 +136,9 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * jumpDeceleration);
     }
 
-    private void Descend()
-    {
-        rb.velocity = new Vector2(rb.velocity.x, -1f * jumpForce);
-    }
-
     private bool CanNotMove()
     {
-        bool isMovementSkillActive = playerController.playerShape.shape.isMovementSkillActive;
-        return isMovementSkillActive || isJumpActive;
+        bool isSkillActive = playerController.playerShape.shape.IsSkillActive();
+        return isSkillActive || isJumpActive;
     }
 }

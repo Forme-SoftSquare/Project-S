@@ -18,6 +18,7 @@ public abstract class Shape : MonoBehaviour
 
     internal ShapeStats stats;
 
+    internal bool isPassiveSkillActive = false;
     internal bool isMovementSkillActive = false;
     internal bool isActionSkillActive = false;
 
@@ -35,7 +36,13 @@ public abstract class Shape : MonoBehaviour
 
     protected void ClearSkills()
     {
+        isPassiveSkillActive = false;
         isMovementSkillActive = false;
         isActionSkillActive = false;
+    }
+
+    public bool IsSkillActive()
+    {
+        return isPassiveSkillActive || isMovementSkillActive || isActionSkillActive;
     }
 }
