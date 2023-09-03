@@ -15,11 +15,7 @@ public class Circle : Shape
 
     public override void HandlePassiveSkill()
     {
-        bool canMove = playerController.playerMovement.CanMove();
-
-        bool isUpPressed = playerController.playerInput.isUpPressed;
-        bool isInAir = playerController.playerMovement.isInAir;
-        if (canMove && isUpPressed && isInAir && doubleJumpUnlocked && !hasDoubleJumped)
+        if (ShouldDoubleJump())
         {
             hasDoubleJumped = true;
             StartCoroutine(playerController.playerMovement.JumpCoroutine());
@@ -50,5 +46,13 @@ public class Circle : Shape
     public override void DestroyShape()
     {
         Destroy(gameObject.GetComponent<Circle>());
+    }
+
+    private bool ShouldDoubleJump()
+    {
+        bool canMove = playerController.playerMovement.CanMove();
+        bool isUpPressed = playerController.playerInput.isUpPressed;
+        bool isInAir = playerController.playerMovement.isInAir;
+        return canMove && isUpPressed && isInAir && doubleJumpUnlocked && !hasDoubleJumped;
     }
 }
