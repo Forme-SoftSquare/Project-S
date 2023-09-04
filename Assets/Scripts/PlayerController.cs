@@ -16,9 +16,9 @@ public class PlayerController : MonoBehaviour
     // Awake is called before Start functions
     void Awake()
     {
-        rb = gameObject.GetComponent<Rigidbody2D>();
-        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        trailRenderer = gameObject.GetComponent<TrailRenderer>();
+        rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        trailRenderer = GetComponent<TrailRenderer>();
 
         playerShape = GetComponent<PlayerShape>();
         playerInput = GetComponent<PlayerInput>();
