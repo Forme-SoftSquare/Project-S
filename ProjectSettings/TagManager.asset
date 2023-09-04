@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Platform
   - Wall
+  - Health Bar
   layers:
   - Default
   - TransparentFX
@@ -48,4 +49,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 2847150119
+    locked: 0
+  - name: Health Bar
+    uniqueID: 4075580155
     locked: 0
