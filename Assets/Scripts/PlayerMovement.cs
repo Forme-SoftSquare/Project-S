@@ -32,12 +32,15 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (CanNotMove()) return;
+        if (CanMove())
+        {
+            HandleHorizontalMovement();
+            HandleVerticalMovement();
+        }
 
-        HandleHorizontalMovement();
-        HandleVerticalMovement();
         playerController.playerShape.shape.HandlePassiveSkill();
         playerController.playerShape.shape.HandleMovementSkill();
+        playerController.playerShape.shape.HandleActionSkill();
     }
 
     private void HandleHorizontalMovement()
@@ -136,9 +139,9 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * jumpDeceleration);
     }
 
-    private bool CanNotMove()
+    public bool CanMove()
     {
-        bool isSkillActive = playerController.playerShape.shape.IsSkillActive();
-        return isSkillActive || isJumpActive;
+        bool isBlockingSkillActive = playerController.playerShape.shape.IsBlockingSkillActive();
+        return !isBlockingSkillActive && !isJumpActive;
     }
 }

@@ -16,7 +16,7 @@ public class PlayerShape : MonoBehaviour
 
     void Update()
     {
-        if (shape.IsSkillActive()) return;
+        if (shape.IsBlockingSkillActive()) return;
 
         if (playerController.playerInput.isAlpha1Pressed)
         {

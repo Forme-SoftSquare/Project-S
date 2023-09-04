@@ -19,6 +19,9 @@ public class PlayerInput : MonoBehaviour
     internal bool isAlpha5Pressed;
 
     internal bool isMovementSkillPressed;
+    public bool isActionSkillPressed;
+    public bool isActionSkillReleased;
+    public bool isActionSkillHeld;
 
     void Start()
     {
@@ -42,5 +45,8 @@ public class PlayerInput : MonoBehaviour
         isAlpha5Pressed = Input.GetKeyDown(KeyCode.Alpha5);
 
         isMovementSkillPressed = Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift);
+        isActionSkillPressed = Input.GetKeyDown(KeyCode.F);
+        isActionSkillReleased = Input.GetKeyUp(KeyCode.F);
+        isActionSkillHeld = Input.GetKey(KeyCode.F);
     }
 }
