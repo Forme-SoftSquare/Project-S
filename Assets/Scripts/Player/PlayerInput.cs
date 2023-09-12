@@ -19,9 +19,9 @@ public class PlayerInput : MonoBehaviour
     internal bool isAlpha5Pressed;
 
     internal bool isMovementSkillPressed;
-    public bool isActionSkillPressed;
-    public bool isActionSkillReleased;
-    public bool isActionSkillHeld;
+    internal bool isActionSkillPressed;
+    internal bool isActionSkillReleased;
+    internal bool isActionSkillHeld;
 
     void Start()
     {
