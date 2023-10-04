@@ -3,7 +3,7 @@ using UnityEngine;
 public class Square : Shape
 {
 
-    private readonly float groundPoundForce = 40f;
+    private readonly float groundPoundForce = 50f;
 
     private bool isGroundPoundActive = false;
     private bool isShieldActive = false;
@@ -17,13 +17,23 @@ public class Square : Shape
 
     public override void HandlePassiveSkill()
     {
-        bool canMove = playerController.playerMovement.CanMove();
+        bool canNotMove = !playerController.playerMovement.CanMove();
+        // if the player can't move but not because of the ground pound, return
+        if (canNotMove && !isGroundPoundActive) return;
+
         bool isInAir = playerController.playerMovement.isInAir;
         bool isDownHeld = playerController.playerInput.isDownHeld;
 
-        if (canMove && isInAir && isDownHeld)
+        bool shouldActiveGroundPound = isInAir && isDownHeld && !isGroundPoundActive;
+        bool shouldContinueToDescend = isInAir && isGroundPoundActive;
+
+        if (shouldActiveGroundPound)
         {
             GroundPound();
+        }
+        else if (shouldContinueToDescend)
+        {
+            Descend();
         }
     }
 
@@ -70,7 +80,11 @@ public class Square : Shape
     private void GroundPound()
     {
         isGroundPoundActive = true;
+        Descend();
+    }
 
+    private void Descend()
+    {
         Rigidbody2D rb = playerController.rb;
         rb.velocity = new Vector2(rb.velocity.x, -1f * groundPoundForce);
     }
